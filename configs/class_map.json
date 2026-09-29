@@ -1,0 +1,81 @@
+{
+  "version": "0.1.0",
+  "phase": "D1",
+  "phase1_classes": [
+    "crack",
+    "spalling",
+    "exposed_rebar"
+  ],
+  "classes": [
+    {
+      "id": 0,
+      "key": "crack",
+      "display_name_zh": "混凝土裂缝",
+      "phase": 1,
+      "source_aliases": {
+        "gyu_det": ["Crack", "crack", "cracks"],
+        "dacl10k": ["Crack", "ACrack"],
+        "crackseg9k": ["crack"]
+      }
+    },
+    {
+      "id": 1,
+      "key": "spalling",
+      "display_name_zh": "剥落或掉块",
+      "phase": 1,
+      "source_aliases": {
+        "gyu_det": ["Spalling", "spalling"],
+        "dacl10k": ["Spalling"]
+      }
+    },
+    {
+      "id": 2,
+      "key": "exposed_rebar",
+      "display_name_zh": "钢筋裸露",
+      "phase": 1,
+      "source_aliases": {
+        "gyu_det": ["Exposed Reinforcement", "exposed_reinforcement", "ExposedRebars"],
+        "dacl10k": ["ExposedRebars"]
+      }
+    },
+    {
+      "id": 3,
+      "key": "rust",
+      "display_name_zh": "钢结构锈蚀或混凝土腐蚀",
+      "phase": 2,
+      "source_aliases": {
+        "dacl10k": ["Rust", "WConccor"]
+      }
+    },
+    {
+      "id": 4,
+      "key": "efflorescence",
+      "display_name_zh": "泛碱或渗水",
+      "phase": 2,
+      "source_aliases": {
+        "gyu_det": ["Water Seepage", "water_seepage"],
+        "dacl10k": ["Efflorescence", "Wetspot"]
+      }
+    },
+    {
+      "id": 5,
+      "key": "honeycomb",
+      "display_name_zh": "蜂窝面或孔洞",
+      "phase": 2,
+      "source_aliases": {
+        "gyu_det": ["Honeycomb Surface", "Holes", "honeycomb", "hole"],
+        "dacl10k": ["Rockpocket", "Cavity", "Hollowareas"]
+      }
+    }
+  ],
+  "ignored_source_classes": [
+    "Bearing",
+    "EJoint",
+    "Drainage",
+    "PEquipment",
+    "JTape",
+    "Graffiti",
+    "Weathering",
+    "Restformwork"
+  ]
+}

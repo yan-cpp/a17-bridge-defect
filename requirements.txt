@@ -1,0 +1,5 @@
+# Core Python dependencies for configuration, data processing and tests.
+numpy>=1.26,<3
+opencv-python-headless>=4.9,<5
+Pillow>=10,<12
+pydantic>=2.6,<3

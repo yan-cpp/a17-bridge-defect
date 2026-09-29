@@ -1,0 +1,60 @@
+{
+  "version": "0.1.0",
+  "status": "template",
+  "roots": {
+    "raw": "data/raw",
+    "interim": "data/interim",
+    "processed": "data/processed"
+  },
+  "sources": [
+    {
+      "name": "gyu_det",
+      "role": "detection_primary",
+      "url": "https://www.scidb.cn/detail?dataSetId=68827df9f367442c8be0c283e60ed3b7",
+      "license": "CC BY 4.0",
+      "download_status": "pending"
+    },
+    {
+      "name": "dacl10k",
+      "role": "segmentation_primary",
+      "url": "https://github.com/phiyodr/dacl10k-toolkit",
+      "license": "official toolkit states CC BY-NC 4.0",
+      "download_status": "pending"
+    },
+    {
+      "name": "crackseg9k",
+      "role": "segmentation_pretrain",
+      "url": "https://github.com/Dhananjay42/crackseg9k",
+      "license": "CC0 1.0",
+      "download_status": "pending"
+    },
+    {
+      "name": "concrete_crack_segmentation",
+      "role": "segmentation_supplement",
+      "url": "https://data.mendeley.com/datasets/jwsn7tfbrp/1",
+      "license": "CC BY 4.0",
+      "download_status": "pending"
+    },
+    {
+      "name": "sdnet2018",
+      "role": "classification_pretrain_and_negative",
+      "url": "https://digitalcommons.usu.edu/all_datasets/48/",
+      "license": "CC BY 4.0",
+      "download_status": "pending"
+    }
+  ],
+  "split_policy": {
+    "unit": "bridge_or_capture_batch_or_date",
+    "forbid_near_duplicate_cross_split": true,
+    "ratios": {
+      "train": 0.8,
+      "validation": 0.1,
+      "test": 0.1
+    }
+  },
+  "manifest_files": {
+    "train": "data/processed/manifests/train.jsonl",
+    "validation": "data/processed/manifests/validation.jsonl",
+    "test": "data/processed/manifests/test.jsonl"
+  }
+}

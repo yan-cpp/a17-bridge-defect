@@ -1,0 +1,33 @@
+{
+  "version": "0.1.0",
+  "python": {
+    "minimum": "3.10",
+    "recommended": "3.11"
+  },
+  "gpu": {
+    "recommended": "NVIDIA RTX 4090 24GB",
+    "minimum_vram_gb": 12
+  },
+  "optional_packages": [
+    "numpy",
+    "cv2",
+    "PIL",
+    "pydantic",
+    "torch",
+    "torchvision",
+    "ultralytics",
+    "skimage",
+    "albumentations",
+    "onnxruntime"
+  ],
+  "preprocessing": {
+    "tile_size": 1024,
+    "tile_overlap": 128,
+    "preserve_aspect_ratio": true
+  },
+  "inference": {
+    "precision": "fp16",
+    "backend": "pytorch_then_tensorrt",
+    "batch_tiles": 4
+  }
+}

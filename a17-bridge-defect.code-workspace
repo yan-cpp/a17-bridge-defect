@@ -1,0 +1,27 @@
+{
+  "folders": [
+    {
+      "name": "A17 Bridge Defect",
+      "path": "."
+    }
+  ],
+  "settings": {
+    "python.defaultInterpreterPath": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+    "python.analysis.extraPaths": [
+      "${workspaceFolder}\\src"
+    ],
+    "python.testing.unittestEnabled": true,
+    "python.testing.pytestEnabled": false,
+    "terminal.integrated.env.windows": {
+      "PYTHONPATH": "${workspaceFolder}\\src"
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      "ms-python.python",
+      "ms-python.vscode-pylance",
+      "charliermarsh.ruff",
+      "redhat.vscode-yaml"
+    ]
+  }
+}

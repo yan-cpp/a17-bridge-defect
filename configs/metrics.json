@@ -1,0 +1,61 @@
+{
+  "version": "0.1.0",
+  "scope": "A17 bridge surface defect detection and instance segmentation",
+  "phase1_classes": [
+    "crack",
+    "spalling",
+    "exposed_rebar"
+  ],
+  "detection": {
+    "primary_metrics": [
+      "mAP@0.5",
+      "mAP@0.5:0.95",
+      "precision",
+      "recall"
+    ],
+    "per_class_reporting_required": true,
+    "acceptance": "must_not_be_lower_than_selected_yolo_or_transformer_baseline"
+  },
+  "segmentation": {
+    "primary_metrics": [
+      "MaskIoU",
+      "Dice",
+      "BoundaryF1"
+    ],
+    "per_class_reporting_required": true,
+    "acceptance": "mask_iou_must_not_be_lower_than_selected_baseline"
+  },
+  "quantification": {
+    "required_outputs": [
+      "length_mm",
+      "width_mm",
+      "scale_mm_per_pixel"
+    ],
+    "internal_targets": {
+      "length_mape_percent_max": 10.0,
+      "width_mape_percent_max": 15.0,
+      "repeatability_percent_max": 5.0
+    },
+    "width_statistic": "p95_with_median_reported"
+  },
+  "latency": {
+    "resolution": [3840, 2160],
+    "gpu": "NVIDIA RTX 4090 or equivalent",
+    "target_end_to_end_p95_ms": 200,
+    "report_breakdown": [
+      "preprocess_ms",
+      "inference_ms",
+      "postprocess_ms",
+      "quantification_ms"
+    ]
+  },
+  "robustness_scenarios": [
+    "shadow",
+    "water_reflection",
+    "stain",
+    "construction_joint",
+    "vegetation",
+    "motion_blur",
+    "tiny_target"
+  ]
+}

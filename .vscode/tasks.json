@@ -1,0 +1,84 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "A17: validate config",
+      "type": "shell",
+      "command": "python",
+      "args": [
+        "-m",
+        "a17",
+        "validate-config"
+      ],
+      "options": {
+        "env": {
+          "PYTHONPATH": "${workspaceFolder}\\src"
+        }
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "A17: doctor",
+      "type": "shell",
+      "command": "python",
+      "args": [
+        "-m",
+        "a17",
+        "doctor"
+      ],
+      "options": {
+        "env": {
+          "PYTHONPATH": "${workspaceFolder}\\src"
+        }
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "A17: smoke",
+      "type": "shell",
+      "command": "python",
+      "args": [
+        "-m",
+        "a17",
+        "smoke"
+      ],
+      "options": {
+        "env": {
+          "PYTHONPATH": "${workspaceFolder}\\src"
+        }
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "A17: tests",
+      "type": "shell",
+      "command": "python",
+      "args": [
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "options": {
+        "env": {
+          "PYTHONPATH": "${workspaceFolder}\\src"
+        }
+      },
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "A17: all checks",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "A17: validate config",
+        "A17: doctor",
+        "A17: smoke",
+        "A17: tests"
+      ],
+      "problemMatcher": []
+    }
+  ]
+}
