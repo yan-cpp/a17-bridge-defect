@@ -29,3 +29,7 @@ weights/*
 .codex-presentation-build/
 .codex-finalizer/
 
+
+.test-*/
+.t_manual/
+

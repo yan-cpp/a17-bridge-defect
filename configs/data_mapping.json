@@ -1,0 +1,41 @@
+{
+  "version": "0.1.0",
+  "description": "Source label names mapped to the A17 internal class keys.",
+  "phase1_classes": ["crack", "spalling", "exposed_rebar"],
+  "phase2_classes": ["rust", "efflorescence", "honeycomb"],
+  "source_mappings": {
+    "gyu_det": {
+      "Crack": "crack",
+      "crack": "crack",
+      "cracks": "crack",
+      "Spalling": "spalling",
+      "spalling": "spalling",
+      "Exposed Reinforcement": "exposed_rebar",
+      "exposed_reinforcement": "exposed_rebar",
+      "ExposedRebars": "exposed_rebar",
+      "Water Seepage": "efflorescence",
+      "water_seepage": "efflorescence",
+      "Honeycomb Surface": "honeycomb",
+      "Holes": "honeycomb",
+      "honeycomb": "honeycomb",
+      "hole": "honeycomb"
+    },
+    "dacl10k": {
+      "Crack": "crack",
+      "ACrack": "crack",
+      "Spalling": "spalling",
+      "ExposedRebars": "exposed_rebar",
+      "Rust": "rust",
+      "WConccor": "rust",
+      "Efflorescence": "efflorescence",
+      "Wetspot": "efflorescence",
+      "Rockpocket": "honeycomb",
+      "Cavity": "honeycomb",
+      "Hollowareas": "honeycomb"
+    }
+  },
+  "ignored_classes": [
+    "Bearing", "EJoint", "Drainage", "PEquipment", "JTape",
+    "Graffiti", "Weathering", "Restformwork"
+  ]
+}

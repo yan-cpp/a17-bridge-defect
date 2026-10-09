@@ -1,0 +1,11 @@
+task: detect
+model: yolo11n.pt
+data: data/processed/gyu_det/dataset.yaml
+epochs: 50
+imgsz: 1024
+batch: 2
+device: 0
+patience: 20
+save_period: 5
+project: outputs/train
+name: gyu_det_baseline

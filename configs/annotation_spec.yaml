@@ -1,0 +1,81 @@
+# A17 桥梁表观病害标注规范
+version: 0.1.0
+
+# 第一阶段目标类别
+phase1_classes:
+  - crack
+  - spalling
+  - exposed_rebar
+
+# 第二阶段类别
+phase2_classes:
+  - rust
+  - efflorescence
+  - honeycomb
+
+# 图像要求
+image:
+  allowed_extensions: [jpg, jpeg, png, bmp, tif, tiff]
+  minimum_side_px: 64
+  keep_original_resolution: true
+
+# 检测框标注规则
+detection:
+  format: yolo_normalized_xywh
+  class_index_zero_based: true
+  include_occluded: true
+  ignore_truncated_edge_targets: true
+  minimum_side_ratio: 0.001
+
+# 实例分割标注规则（用于 dacl10k 和自采数据）
+segmentation:
+  format: yolo_seg_polygon_or_coco
+  require_polygon_mask: true
+  allow_semantic_polygon: true
+  min_mask_area_px: 4
+
+# 病害判定规则
+defect_rules:
+  crack:
+    label_note: 连续线状或树枝状裂缝，不包含施工缝
+    minimum_width: 未定义，以可辨识像素为准
+  spalling:
+    label_note: 混凝土剥落、掉块或缺失区域
+    include_edge_break: true
+  exposed_rebar:
+    label_note: 肉眼可见的钢筋外露或钢筋区域
+  rust:
+    label_note: 钢结构锈蚀或混凝土锈染
+  efflorescence:
+    label_note: 泛碱、渗水、湿斑
+  honeycomb:
+    label_note: 蜂窝麻面、孔洞
+
+# 困难样本与干扰项
+hard_negative_rules:
+  - construction_joint
+  - shadow
+  - water_reflection
+  - graffiti
+  - vegetation
+  - formwork
+  - sealant
+
+# 数据划分规则
+split_policy:
+  unit: bridge_or_capture_batch_or_date
+  ratios:
+    train: 0.8
+    validation: 0.1
+    test: 0.1
+  forbid_same_source_cross_split: true
+  seed: 42
+
+# 数据质检规则
+quality_checks:
+  - no_empty_labels
+  - no_duplicate_filenames
+  - image_label_extension_match
+  - label_class_index_in_range
+  - coordinates_in_01_range
+  - mask_matches_image_size

@@ -1,0 +1,11 @@
+task: segment
+model: yolo11n-seg.pt
+data: data/processed/dacl10k/dataset.yaml
+epochs: 80
+imgsz: 1024
+batch: 2
+device: 0
+patience: 20
+save_period: 5
+project: outputs/train
+name: dacl_seg_baseline

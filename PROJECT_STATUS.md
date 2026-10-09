@@ -26,3 +26,24 @@
 - [ ] 核对许可证和下载完整性。
 - [ ] 生成原始数据清单和数据统计表。
 - [ ] 抽样检查图像质量、分辨率和重复样本。
+
+## Week 2 Data Standard And Mapping
+
+- [x] 标注规范：`docs/annotation_spec.md` 和 `configs/annotation_spec.yaml`。
+- [x] 类别映射：`configs/data_mapping.json`。
+- [x] 数据卡模板：`docs/data_card_template.md`。
+- [x] GYU-DET 自动发现与统计脚本：`src/a17/data/inspect_gyu.py`。
+- [x] GYU-DET 转 A17 YOLO 检测格式脚本：`src/a17/data/convert_gyu.py`。
+- [x] 单元测试覆盖数据解析和 Mask IoU。
+
+## Week 3 YOLO Baseline And Evaluation
+
+- [x] 检测基线训练脚本：`src/a17/train/train_yolo.py`。
+- [x] 分割基线配置：`configs/train_dacl_seg.yaml`。
+- [x] mAP / Mask IoU / FPS 评测脚本：`src/a17/eval/evaluate.py` 和 `src/a17/eval/mask_iou.py`。
+- [x] PowerShell 运行脚本：`scripts/train_gyu_det.ps1`、`scripts/evaluate_gyu_det.ps1`。
+
+## Blocked On External Inputs
+
+- [ ] 找到 GYU-DET 的 `train.zip`、`valid.zip`、`test.zip` 实际路径。
+- [ ] 安装 `torch`、`torchvision`、`ultralytics` 后执行真实基线训练。
