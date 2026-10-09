@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import shutil
 import zipfile
 from pathlib import Path
 
@@ -79,7 +80,7 @@ def convert_split(zip_path: Path, split: str, output_root: Path, class_lookup: d
             if target_image.exists() and not overwrite:
                 continue
             with archive.open(name) as source, open(target_image, "wb") as target:
-                target.write(source.read())
+                shutil.copyfileobj(source, target, length=1024 * 1024)
             copied_images += 1
 
         for label_name in _iter_labels(archive):
