@@ -19,12 +19,12 @@ GYU-DET 的 `classes.txt` 类别统一映射如下：
 
 | GYU-DET 原始标签 | A17 内部类别 |
 |---|---|
-| Crack / crack / cracks | crack |
-| Spalling / spalling | spalling |
-| Exposed Reinforcement | exposed_rebar |
-| Water Seepage | efflorescence |
-| Honeycomb Surface | honeycomb |
-| Holes | honeycomb |
+| Crack | crack |
+| Breakage | spalling |
+| Reinforcement | exposed_rebar |
+| Seepage | efflorescence |
+| Comb | honeycomb |
+| Hole | honeycomb |
 
 dacl10k 映射关系见 `configs/data_mapping.json`。
 

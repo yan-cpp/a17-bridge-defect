@@ -33,3 +33,8 @@ weights/*
 .test-*/
 .t_manual/
 
+
+runs/
+Ultralytics/
+.ultralytics/
+

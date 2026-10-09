@@ -64,6 +64,11 @@ def read_classes(zip_path: Path) -> list[str]:
     return [line.strip() for line in raw.splitlines() if line.strip()]
 
 
+def read_classes_from_file(path: Path) -> list[str]:
+    raw = path.read_text(encoding="utf-8", errors="replace")
+    return [line.strip() for line in raw.splitlines() if line.strip()]
+
+
 def _iter_labels(archive: zipfile.ZipFile):
     for name in archive.namelist():
         lower = name.lower()
@@ -143,6 +148,12 @@ def build_data_card(search_roots: list[str] | None = None) -> dict:
         if not paths:
             continue
         classes = classes or read_classes(paths[0])
+        if not classes:
+            for root in [Path(item) for item in (search_roots or DEFAULT_SEARCH_ROOTS)]:
+                classes_file = root / "classes.txt" if root.is_dir() else None
+                if classes_file and classes_file.exists():
+                    classes = read_classes_from_file(classes_file)
+                    break
         stats = count_labels(paths[0], classes)
         sizes = sample_image_sizes(paths[0], limit=5)
         splits[split] = {

@@ -5,6 +5,7 @@ param(
 $ErrorActionPreference = "Stop"
 $ProjectRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
 $env:PYTHONPATH = Join-Path $ProjectRoot "src"
+$env:YOLO_CONFIG_DIR = Join-Path $ProjectRoot ".ultralytics"
 $Python = if (Test-Path (Join-Path $ProjectRoot ".venv\Scripts\python.exe")) { Join-Path $ProjectRoot ".venv\Scripts\python.exe" } else { "python" }
 Push-Location $ProjectRoot
 try {

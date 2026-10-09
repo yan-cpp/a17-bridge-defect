@@ -13,9 +13,18 @@
       "display_name_zh": "混凝土裂缝",
       "phase": 1,
       "source_aliases": {
-        "gyu_det": ["Crack", "crack", "cracks"],
-        "dacl10k": ["Crack", "ACrack"],
-        "crackseg9k": ["crack"]
+        "gyu_det": [
+          "Crack",
+          "crack",
+          "cracks"
+        ],
+        "dacl10k": [
+          "Crack",
+          "ACrack"
+        ],
+        "crackseg9k": [
+          "crack"
+        ]
       }
     },
     {
@@ -24,8 +33,13 @@
       "display_name_zh": "剥落或掉块",
       "phase": 1,
       "source_aliases": {
-        "gyu_det": ["Spalling", "spalling"],
-        "dacl10k": ["Spalling"]
+        "gyu_det": [
+          "Breakage",
+          "breakage"
+        ],
+        "dacl10k": [
+          "Spalling"
+        ]
       }
     },
     {
@@ -34,8 +48,13 @@
       "display_name_zh": "钢筋裸露",
       "phase": 1,
       "source_aliases": {
-        "gyu_det": ["Exposed Reinforcement", "exposed_reinforcement", "ExposedRebars"],
-        "dacl10k": ["ExposedRebars"]
+        "gyu_det": [
+          "Reinforcement",
+          "reinforcement"
+        ],
+        "dacl10k": [
+          "ExposedRebars"
+        ]
       }
     },
     {
@@ -44,7 +63,10 @@
       "display_name_zh": "钢结构锈蚀或混凝土腐蚀",
       "phase": 2,
       "source_aliases": {
-        "dacl10k": ["Rust", "WConccor"]
+        "dacl10k": [
+          "Rust",
+          "WConccor"
+        ]
       }
     },
     {
@@ -53,8 +75,14 @@
       "display_name_zh": "泛碱或渗水",
       "phase": 2,
       "source_aliases": {
-        "gyu_det": ["Water Seepage", "water_seepage"],
-        "dacl10k": ["Efflorescence", "Wetspot"]
+        "gyu_det": [
+          "Seepage",
+          "seepage"
+        ],
+        "dacl10k": [
+          "Efflorescence",
+          "Wetspot"
+        ]
       }
     },
     {
@@ -63,8 +91,17 @@
       "display_name_zh": "蜂窝面或孔洞",
       "phase": 2,
       "source_aliases": {
-        "gyu_det": ["Honeycomb Surface", "Holes", "honeycomb", "hole"],
-        "dacl10k": ["Rockpocket", "Cavity", "Hollowareas"]
+        "gyu_det": [
+          "Comb",
+          "Hole",
+          "comb",
+          "hole"
+        ],
+        "dacl10k": [
+          "Rockpocket",
+          "Cavity",
+          "Hollowareas"
+        ]
       }
     }
   ],

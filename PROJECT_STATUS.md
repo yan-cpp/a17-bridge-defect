@@ -43,7 +43,16 @@
 - [x] mAP / Mask IoU / FPS 评测脚本：`src/a17/eval/evaluate.py` 和 `src/a17/eval/mask_iou.py`。
 - [x] PowerShell 运行脚本：`scripts/train_gyu_det.ps1`、`scripts/evaluate_gyu_det.ps1`。
 
-## Blocked On External Inputs
+## Completed Weeks 2 And 3
 
-- [ ] 找到 GYU-DET 的 `train.zip`、`valid.zip`、`test.zip` 实际路径。
-- [ ] 安装 `torch`、`torchvision`、`ultralytics` 后执行真实基线训练。
+- [x] 下载并解包 GYU-DET V4，完成类别映射和数据卡。
+- [x] 安装 torch、torchvision、ultralytics、scikit-image、albumentations。
+- [x] 建立 237 张训练 / 55 张验证 / 60 张测试的子集。
+- [x] 跑通 YOLO11n 检测基线，5 epochs。
+- [x] 生成 mAP / FPS 基线指标表。
+
+## Remaining
+
+- [ ] 下载 dacl10k 分割数据，跑通 YOLO-seg 分割基线。
+- [ ] 用完整 GYU-DET 数据训练高精度模型。
+- [ ] 完成量化模块和 Demo 系统。

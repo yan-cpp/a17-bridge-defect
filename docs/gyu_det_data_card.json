@@ -1,0 +1,159 @@
+{
+  "name": "GYU-DET",
+  "classes": [
+    "Crack",
+    "Breakage",
+    "Comb",
+    "Hole",
+    "Reinforcement",
+    "Seepage"
+  ],
+  "splits": {
+    "test": {
+      "archives": [
+        "D:\\zm\\newA\\a17-bridge-defect\\data\\interim\\gyu_det\\test.zip"
+      ],
+      "statistics": {
+        "label_files": 1053,
+        "instances": 5886,
+        "class_counts": {
+          "Breakage": 3628,
+          "Comb": 281,
+          "Crack": 404,
+          "Hole": 69,
+          "Reinforcement": 1381,
+          "Seepage": 123
+        },
+        "malformed_lines": 0
+      },
+      "image_samples": [
+        {
+          "file": "test/images/12320.jpg",
+          "width": 4608,
+          "height": 3456
+        },
+        {
+          "file": "test/images/12321.jpg",
+          "width": 1600,
+          "height": 1200
+        },
+        {
+          "file": "test/images/12322.jpg",
+          "width": 1088,
+          "height": 816
+        },
+        {
+          "file": "test/images/12323.jpg",
+          "width": 4608,
+          "height": 3456
+        },
+        {
+          "file": "test/images/12324.jpg",
+          "width": 4608,
+          "height": 3456
+        }
+      ]
+    },
+    "train": {
+      "archives": [
+        "D:\\zm\\newA\\a17-bridge-defect\\data\\interim\\gyu_det\\train.zip"
+      ],
+      "statistics": {
+        "label_files": 8334,
+        "instances": 37715,
+        "class_counts": {
+          "Breakage": 13417,
+          "Comb": 4956,
+          "Crack": 3883,
+          "Hole": 930,
+          "Reinforcement": 10658,
+          "Seepage": 3871
+        },
+        "malformed_lines": 0
+      },
+      "image_samples": [
+        {
+          "file": "train/images/10.JPG",
+          "width": 2736,
+          "height": 1824
+        },
+        {
+          "file": "train/images/1000.JPG",
+          "width": 2736,
+          "height": 1824
+        },
+        {
+          "file": "train/images/10001.jpg",
+          "width": 4608,
+          "height": 3456
+        },
+        {
+          "file": "train/images/10002.jpg",
+          "width": 2048,
+          "height": 1536
+        },
+        {
+          "file": "train/images/10003.jpg",
+          "width": 2272,
+          "height": 1704
+        }
+      ]
+    },
+    "validation": {
+      "archives": [
+        "D:\\zm\\newA\\a17-bridge-defect\\data\\interim\\gyu_det\\valid.zip"
+      ],
+      "statistics": {
+        "label_files": 1045,
+        "instances": 4930,
+        "class_counts": {
+          "Breakage": 2141,
+          "Comb": 479,
+          "Crack": 366,
+          "Hole": 230,
+          "Reinforcement": 1335,
+          "Seepage": 379
+        },
+        "malformed_lines": 0
+      },
+      "image_samples": [
+        {
+          "file": "valid/images/11962.jpg",
+          "width": 1600,
+          "height": 1200
+        },
+        {
+          "file": "valid/images/11963.jpg",
+          "width": 4608,
+          "height": 3456
+        },
+        {
+          "file": "valid/images/11964.jpg",
+          "width": 2048,
+          "height": 1536
+        },
+        {
+          "file": "valid/images/11965.jpg",
+          "width": 4608,
+          "height": 3456
+        },
+        {
+          "file": "valid/images/11966.jpg",
+          "width": 6000,
+          "height": 4000
+        }
+      ]
+    }
+  },
+  "source_archives": {
+    "test": [
+      "D:\\zm\\newA\\a17-bridge-defect\\data\\interim\\gyu_det\\test.zip"
+    ],
+    "train": [
+      "D:\\zm\\newA\\a17-bridge-defect\\data\\interim\\gyu_det\\train.zip"
+    ],
+    "validation": [
+      "D:\\zm\\newA\\a17-bridge-defect\\data\\interim\\gyu_det\\valid.zip"
+    ]
+  }
+}

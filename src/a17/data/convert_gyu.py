@@ -5,7 +5,7 @@ import json
 import zipfile
 from pathlib import Path
 
-from .inspect_gyu import _iter_labels, _parse_label_line, find_archives, read_classes
+from .inspect_gyu import _iter_labels, _parse_label_line, find_archives, read_classes, read_classes_from_file
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
 
@@ -135,6 +135,10 @@ def main(argv: list[str] | None = None) -> int:
 
     results = []
     class_lookup: dict[int, str] = {}
+    if args.archives_root:
+        classes_file = Path(args.archives_root) / "classes.txt"
+        if classes_file.exists():
+            class_lookup = {index: name for index, name in enumerate(read_classes_from_file(classes_file))}
     for split in ("train", "validation", "test"):
         paths = archives.get(split, [])
         if not paths:
