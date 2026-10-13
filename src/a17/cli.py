@@ -7,6 +7,7 @@ from pathlib import Path
 from .config import ConfigError, load_config, project_paths, validate_config
 from .environment import environment_report, missing_required_ml_packages, report_as_json
 from .schemas import DefectInstance, ImageResult, SchemaError, Timing
+from .quantify import quantify_mask_file
 
 
 def command_validate_config(args: argparse.Namespace) -> int:
@@ -77,6 +78,27 @@ def command_smoke(args: argparse.Namespace) -> int:
     return 0
 
 
+def command_quantify_mask(args: argparse.Namespace) -> int:
+    from .quantify import quantify_mask_file
+    result = quantify_mask_file(Path(args.mask), args.scale)
+    print(json.dumps(result.__dict__, ensure_ascii=False, indent=2))
+    return 0
+
+
+def command_predict_seg(args: argparse.Namespace) -> int:
+    from .eval.predict_seg import run
+    return run(
+        Path(args.model),
+        Path(args.source),
+        Path(args.output),
+        args.imgsz,
+        args.conf,
+        args.iou,
+        args.device,
+        args.scale,
+    )
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="a17", description="A17 bridge defect project CLI")
     parser.add_argument("--root", help="Project root. Defaults to auto-discovery.")
@@ -91,6 +113,22 @@ def build_parser() -> argparse.ArgumentParser:
 
     smoke_parser = subparsers.add_parser("smoke", help="Create a schema-valid smoke result")
     smoke_parser.set_defaults(func=command_smoke)
+
+    quantify_parser = subparsers.add_parser("quantify-mask", help="Quantify crack length/width from a binary mask")
+    quantify_parser.add_argument("--mask", required=True)
+    quantify_parser.add_argument("--scale", type=float, required=True)
+    quantify_parser.set_defaults(func=command_quantify_mask)
+
+    predict_seg_parser = subparsers.add_parser("predict-seg", help="Segment images and export masks and JSON")
+    predict_seg_parser.add_argument("--model", required=True)
+    predict_seg_parser.add_argument("--source", required=True)
+    predict_seg_parser.add_argument("--output", default="outputs/predict_seg")
+    predict_seg_parser.add_argument("--imgsz", type=int, default=1024)
+    predict_seg_parser.add_argument("--conf", type=float, default=0.25)
+    predict_seg_parser.add_argument("--iou", type=float, default=0.5)
+    predict_seg_parser.add_argument("--device", default="0")
+    predict_seg_parser.add_argument("--scale", type=float, default=None)
+    predict_seg_parser.set_defaults(func=command_predict_seg)
 
     return parser
 

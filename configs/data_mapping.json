@@ -39,6 +39,17 @@
       "Rockpocket": "honeycomb",
       "Cavity": "honeycomb",
       "Hollowareas": "honeycomb"
+    },
+    "crackseg9k": {
+      "crack": "crack",
+      "cracked": "crack"
+    },
+    "concrete_crack_seg": {
+      "crack": "crack"
+    },
+    "sdnet2018": {
+      "Cracked": "crack",
+      "cracked": "crack"
     }
   },
   "ignored_classes": [

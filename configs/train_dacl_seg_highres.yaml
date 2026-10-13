@@ -1,0 +1,11 @@
+task: segment
+model: yolo11n-seg.pt
+data: data/processed/a17_combined/dataset.yaml
+epochs: 40
+imgsz: 1024
+batch: 2
+device: 0
+patience: 15
+save_period: 10
+project: outputs/train
+name: dacl_seg_highres_long

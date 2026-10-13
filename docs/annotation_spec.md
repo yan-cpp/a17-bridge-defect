@@ -81,3 +81,11 @@ dacl10k 映射关系见 `configs/data_mapping.json`。
 - 检测框坐标在 0 到 1 范围内。
 - Mask 尺寸与图像尺寸一致。
 - 训练、验证、测试之间没有重复文件名和同源泄漏。
+
+## 9. 数据源格式差异
+
+- GYU-DET：YOLO 检测 TXT，每个实例一行 class x_center y_center width height；转换为内部三类后进入检测分支。
+- dacl10k：labelme 风格 JSON，shapes 内为多边形；每个保留的多边形按一个实例写入 YOLO-seg 行 class x1 y1 x2 y2 ...，坐标按 imageWidth 和 imageHeight 归一化。
+- Concrete Crack Segmentation：JSON 的 objects 使用 geometryType=bitmap；bitmap.data 为 base64 PNG，解码后作为二值裂缝掩膜。
+- CrackSeg9k：已经提供 RGB 图像与二值掩膜，类别只有 crack 一类。
+- SDNET2018：文件夹级二分类，只用于预训练或负样本，不直接进入分割训练。
