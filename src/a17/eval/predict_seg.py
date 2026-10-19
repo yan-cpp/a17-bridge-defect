@@ -20,6 +20,10 @@ def run(
     iou: float,
     device: str,
     scale: float | None,
+    tile: int = 1024,
+    overlap: int = 128,
+    stitch: bool = True,
+    half: bool = False,
 ) -> int:
     try:
         from ultralytics import YOLO
@@ -31,6 +35,35 @@ def run(
     masks_dir = output / "masks"
     masks_dir.mkdir(exist_ok=True)
 
+    if source.is_file():
+        image = cv2.imread(str(source))
+        if image is not None and max(image.shape[:2]) > tile:
+            from .tile_inference import predict_tiled, public_records
+
+            records = predict_tiled(
+                model,
+                image,
+                tile=tile,
+                overlap=overlap,
+                imgsz=imgsz,
+                conf=conf,
+                iou=iou,
+                device=device,
+                scale=scale,
+                stitch=stitch,
+                masks_dir=masks_dir,
+                image_name=source.name,
+                half=half,
+            )
+            payload = public_records(records)
+            (output / "predictions.json").write_text(
+                json.dumps(payload, ensure_ascii=False, indent=2),
+                encoding="utf-8",
+            )
+            print(json.dumps(payload, ensure_ascii=False, indent=2))
+            print(f"Saved to {output}")
+            return 0
+
     results = model.predict(
         source=str(source),
         imgsz=imgsz,
@@ -38,6 +71,7 @@ def run(
         iou=iou,
         device=device,
         retina_masks=True,
+        half=half,
         save=False,
     )
 
@@ -100,6 +134,10 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--iou", type=float, default=0.5)
     parser.add_argument("--device", default="0")
     parser.add_argument("--scale", type=float, default=None, help="Millimeters per pixel for quantification.")
+    parser.add_argument("--tile", type=int, default=1024, help="Tile size for large images.")
+    parser.add_argument("--overlap", type=int, default=128, help="Tile overlap in pixels.")
+    parser.add_argument("--no-stitch", action="store_true", help="Disable mask stitching/de-duplication.")
+    parser.add_argument("--half", action="store_true", help="Use FP16 inference on CUDA.")
     args = parser.parse_args(argv)
     return run(
         Path(args.model),
@@ -110,6 +148,10 @@ def main(argv: list[str] | None = None) -> int:
         args.iou,
         args.device,
         args.scale,
+        args.tile,
+        args.overlap,
+        not args.no_stitch,
+        args.half,
     )
 
 

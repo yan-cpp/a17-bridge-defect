@@ -1,0 +1,29 @@
+{
+  "version": "V1",
+  "kind": "first_round_ablation",
+  "model": {
+    "path": "weights/a17_seg_v1_experimental.pt",
+    "source": "runs/segment/outputs/train/ablation_v1_p2_ms_boundary/weights/best.pt",
+    "architecture": "YOLO11n-seg + P2/4 + multi-scale PANet + boundary loss"
+  },
+  "ablation_dataset": {
+    "data": "data/processed/dacl10k_subset/dataset.yaml",
+    "train_images": 239,
+    "val_images": 40,
+    "epochs": 12,
+    "imgsz": 512,
+    "batch": 4
+  },
+  "metrics_from_subset": {
+    "baseline_mask_map50": 0.08953355658743038,
+    "p2_mask_map50": 0.0027011499273433596,
+    "p2_ms_mask_map50": 0.009554672411504912,
+    "p2_ms_boundary_mask_map50": 0.009554672411504912
+  },
+  "conclusion": "The first-round P2/multi-scale/boundary variant did not beat the baseline under the 12-epoch subset budget. It is retained as an experimental V1 artifact; the production V2 freeze uses the higher-accuracy V5 segmentation model.",
+  "recommendation": [
+    "Warm-start from a compatible segmentation checkpoint instead of transferring only generic YOLO weights.",
+    "Train P2/P3 levels with longer schedules and class-balanced sampling.",
+    "Use boundary loss as a fine-tuning term after the detector has converged."
+  ]
+}

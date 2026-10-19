@@ -1,0 +1,55 @@
+{
+  "version": "V2",
+  "created_utc": "2026-10-15T12:53:14.032752+00:00",
+  "model": {
+    "path": "weights\\a17_seg_v2_frozen.pt",
+    "sha256": "4a7951ed47d60f70ee96d1c6fc2ea5926c96ffd240261c5db6e8454ee13a9dd0",
+    "source": "weights\\a17_seg_finetune_v5_last.pt"
+  },
+  "calibration": {
+    "version": "V2",
+    "calibration_id": "a17_demo_calibration_v2",
+    "mm_per_pixel": 0.42,
+    "pixels": 1000.0,
+    "known_mm": 420.0,
+    "method": "reference_distance",
+    "source_image": null,
+    "created_utc": "2026-10-15T12:38:13.378198+00:00",
+    "provisional": true,
+    "notes": "Provisional project calibration; replace pixels/known_mm with a field reference before production use."
+  },
+  "quantification": {
+    "version": "V2",
+    "calibration_file": "configs/calibration_v2.json",
+    "length_method": "8-connected-geodesic-skeleton",
+    "width_statistic": "p95",
+    "width_multiplier": 2.0,
+    "min_area_px": 12,
+    "close_radius": 0,
+    "fill_holes": false,
+    "save_mask": true,
+    "save_skeleton": true,
+    "units": {
+      "length": "mm",
+      "width": "mm",
+      "area": "mm2",
+      "scale": "mm_per_pixel"
+    }
+  },
+  "freeze": {
+    "pt": true,
+    "fp16_onnx": {
+      "path": "weights\\a17_seg_v2_frozen.onnx",
+      "sha256": "959bc67e60ac33a7fea24850d93d3d04f98bbdbea5d49c63cf44a1ce6c41cde6"
+    },
+    "tensorrt": {
+      "path": "weights\\a17_seg_v2_frozen.engine",
+      "sha256": "455fe0db8bedf75647b808c73066f11d358b0a7fb6ea1ee2b61a09979cdaa6a1",
+      "precision": "FP16",
+      "imgsz": 1024,
+      "batch": 4,
+      "dynamic": false,
+      "tensorrt_version": "10.13.3.9"
+    }
+  }
+}

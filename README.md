@@ -112,19 +112,19 @@ python -m a17.eval.evaluate --model runs/detect/outputs/train/gyu_det_full_v2/we
 分割评估：
 
 ```powershell
-python -m a17.eval.evaluate --model runs/segment/outputs/train/dacl_seg_boundary_ft/weights/best.pt --data data/processed/a17_combined/dataset.yaml --task segment --imgsz 640 --split val --name dacl_seg_boundary_ft
+python -m a17.eval.evaluate --model weights/a17_seg_v2_frozen.pt --data data/processed/a17_combined/dataset.yaml --task segment --imgsz 1024 --split val --name a17_seg_v2_frozen
 ```
 
 4K 切块性能基准：
 
 ```powershell
-python -m a17.eval.tile_inference --model runs/segment/outputs/train/dacl_seg_boundary_ft/weights/best.pt --image path/to/4k.jpg --tile 1024 --overlap 128 --imgsz 1024
+python -m a17.eval.tile_inference --model weights/a17_seg_v2_frozen.pt --image path/to/4k.jpg --tile 1024 --overlap 128 --imgsz 1024 --scale 0.42 --half
 ```
 
 TensorRT/ONNX 导出：
 
 ```powershell
-python -m a17.deploy --model runs/segment/outputs/train/dacl_seg_boundary_ft/weights/best.pt --format engine --imgsz 1024 --half
+python -m a17.deploy --model weights/a17_seg_v2_frozen.pt --format engine --imgsz 1024 --half
 ```
 
 ## 量化
@@ -138,7 +138,7 @@ python -m a17 quantify-mask --mask path/to/mask.png --scale 0.42
 分割预测并导出 Mask、JSON 和量化结果：
 
 ```powershell
-python -m a17 predict-seg --model runs/segment/outputs/train/dacl_seg_boundary_ft/weights/best.pt --source path/to/image.jpg --imgsz 1024 --scale 0.42
+python -m a17 predict-seg --model weights/a17_seg_v2_frozen.pt --source path/to/image.jpg --imgsz 1024 --scale 0.42 --tile 1024 --overlap 128 --half
 ```
 
 详见 `docs/quantification.md`。
@@ -150,10 +150,10 @@ python -m a17 predict-seg --model runs/segment/outputs/train/dacl_seg_boundary_f
 ```powershell
 cd D:\zm\newA\a17-bridge-defect
 $env:PYTHONPATH = "$PWD\src"
-python -m a17.demo_server --model runs/segment/outputs/train/dacl_seg_boundary_ft/weights/best.pt --port 8765
+python -m a17.demo_server --model weights/a17_seg_v2_frozen.pt --port 8765
 ```
 
-浏览器打开 `http://127.0.0.1:8765/`，可上传图片或点击示例图片，自动进行检测、分割、量化和可视化；大图自动滑动窗口切块。命令行窗口需要保持打开。
+浏览器打开 `http://127.0.0.1:8765/`，可上传图片或点击示例图片，自动进行检测、分割、量化和可视化；大图自动滑动窗口切块并续接相邻裂缝片段。页面可调整置信度阈值，默认 `0.10`；低于 `0.20` 的结果会提示人工复核。命令行窗口需要保持打开。
 
 ## 基线指标
 

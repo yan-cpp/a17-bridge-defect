@@ -5,6 +5,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from math import sqrt
 from pathlib import Path
 
 import numpy as np
@@ -26,6 +27,8 @@ class QuantResult:
     scale_mm_per_pixel: float
     skeleton_px: int
     connected_components: int
+    length_px: float
+    skeleton_length_method: str = "8-connected-geodesic"
 
 
 def load_binary_mask(path: Path) -> np.ndarray:
@@ -36,17 +39,33 @@ def load_binary_mask(path: Path) -> np.ndarray:
     return (array > 127).astype(np.uint8)
 
 
-def _skeleton_length_px(mask: np.ndarray) -> tuple[int, int]:
-    """Return (skeleton pixel count, connected component count)."""
+def _skeleton_length_px(mask: np.ndarray) -> tuple[float, int, int]:
+    """Return weighted length, skeleton pixel count and component count.
+
+    Counting skeleton pixels underestimates diagonal paths. Count each
+    undirected 4/8-neighbour edge once, with diagonal edges weighted by
+    sqrt(2), to obtain a more accurate centre-line length.
+    """
     labels, num = measure.label(mask, connectivity=2, return_num=True)
-    total = 0
+    total = 0.0
+    skeleton_px = 0
+    kept_components = 0
+    directions = ((0, 1), (1, -1), (1, 0), (1, 1))
     for index in range(1, num + 1):
         component = (labels == index)
         if component.sum() < 4:
             continue
         skeleton = morphology.skeletonize(component)
-        total += int(skeleton.sum())
-    return total, num
+        pixels = {tuple(point) for point in np.argwhere(skeleton)}
+        if not pixels:
+            continue
+        kept_components += 1
+        skeleton_px += len(pixels)
+        for y, x in pixels:
+            for dy, dx in directions:
+                if (y + dy, x + dx) in pixels:
+                    total += sqrt(dy * dy + dx * dx)
+    return total, skeleton_px, kept_components
 
 
 def _robust_width_px(mask: np.ndarray) -> tuple[float, float]:
@@ -61,20 +80,23 @@ def _robust_width_px(mask: np.ndarray) -> tuple[float, float]:
 
 
 def quantify_mask(mask: np.ndarray, mm_per_pixel: float) -> QuantResult:
+    if mm_per_pixel <= 0:
+        raise ValueError("mm_per_pixel must be greater than zero.")
     binary = (mask > 127).astype(np.uint8) if mask.dtype == np.uint8 and mask.max() > 1 else (mask > 0).astype(np.uint8)
     if binary.sum() == 0:
-        return QuantResult(0.0, 0.0, 0.0, 0.0, mm_per_pixel, 0, 0)
-    skeleton_px, components = _skeleton_length_px(binary)
+        return QuantResult(0.0, 0.0, 0.0, 0.0, mm_per_pixel, 0, 0, 0.0)
+    length_px, skeleton_px, components = _skeleton_length_px(binary)
     width_p95, width_max = _robust_width_px(binary)
     area_px = int(binary.sum())
     return QuantResult(
-        length_mm=skeleton_px * mm_per_pixel,
+        length_mm=length_px * mm_per_pixel,
         width_mm_max=width_max * mm_per_pixel,
         width_mm_p95=width_p95 * mm_per_pixel,
         area_mm2=area_px * mm_per_pixel * mm_per_pixel,
         scale_mm_per_pixel=mm_per_pixel,
         skeleton_px=skeleton_px,
         connected_components=components,
+        length_px=length_px,
     )
 
 

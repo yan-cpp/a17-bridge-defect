@@ -1,0 +1,2 @@
+-r requirements-ml.txt
+tensorrt-cu12>=10.13,<11

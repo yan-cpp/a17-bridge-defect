@@ -1,0 +1,12 @@
+{
+  "version": "V2",
+  "calibration_id": "a17_demo_calibration_v2",
+  "mm_per_pixel": 0.42,
+  "pixels": 1000.0,
+  "known_mm": 420.0,
+  "method": "reference_distance",
+  "source_image": null,
+  "created_utc": "2026-10-15T12:38:13.378198+00:00",
+  "provisional": true,
+  "notes": "Provisional project calibration; replace pixels/known_mm with a field reference before production use."
+}

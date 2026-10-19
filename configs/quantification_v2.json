@@ -1,0 +1,18 @@
+{
+  "version": "V2",
+  "calibration_file": "configs/calibration_v2.json",
+  "length_method": "8-connected-geodesic-skeleton",
+  "width_statistic": "p95",
+  "width_multiplier": 2.0,
+  "min_area_px": 12,
+  "close_radius": 0,
+  "fill_holes": false,
+  "save_mask": true,
+  "save_skeleton": true,
+  "units": {
+    "length": "mm",
+    "width": "mm",
+    "area": "mm2",
+    "scale": "mm_per_pixel"
+  }
+}

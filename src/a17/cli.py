@@ -96,6 +96,10 @@ def command_predict_seg(args: argparse.Namespace) -> int:
         args.iou,
         args.device,
         args.scale,
+        args.tile,
+        args.overlap,
+        not args.no_stitch,
+        args.half,
     )
 
 
@@ -128,6 +132,10 @@ def build_parser() -> argparse.ArgumentParser:
     predict_seg_parser.add_argument("--iou", type=float, default=0.5)
     predict_seg_parser.add_argument("--device", default="0")
     predict_seg_parser.add_argument("--scale", type=float, default=None)
+    predict_seg_parser.add_argument("--tile", type=int, default=1024)
+    predict_seg_parser.add_argument("--overlap", type=int, default=128)
+    predict_seg_parser.add_argument("--no-stitch", action="store_true")
+    predict_seg_parser.add_argument("--half", action="store_true")
     predict_seg_parser.set_defaults(func=command_predict_seg)
 
     return parser
